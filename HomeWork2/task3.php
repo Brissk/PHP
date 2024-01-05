@@ -16,7 +16,12 @@ $towns = [
 foreach ($towns as $town => $cities) {
     $result = "";
     for ($i=0; $i < count($cities); $i++) { 
-        $result +=  $cities[$i];
+        if($i == count($cities) - 1) {
+            $result .=  $cities[$i];            
+        } else {
+            $result .=  $cities[$i] . ",";
+        }
     }
         echo $town . ":" . $result . "\n";
 }
+
