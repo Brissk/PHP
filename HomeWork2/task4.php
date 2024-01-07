@@ -1,23 +1,38 @@
+<meta charset="utf-8">
+header('Content-Type: text/html; charset=utf-8'); 
 <?php
 /* 
 Задание 4
 Объявить массив, индексами которого являются буквы русского языка, а значениями – соответствующие латинские буквосочетания (‘а’=> ’a’, ‘б’ => ‘b’, ‘в’ => ‘v’, ‘г’ => ‘g’, …, ‘э’ => ‘e’, ‘ю’ => ‘yu’, ‘я’ => ‘ya’). Написать функцию транслитерации строк.
 */
-header('Content-Type: text/html; charset=utf-8'); 
-
+mb_internal_encoding('UTF-8');
 
 $alphabet = [
-    "а"=> "a", "б"=> "b","в"=> "v","г"=> "g","д"=> "d","е"=> "e","ё"=> "io","ж"=> "dj","з"=> "z","и"=> "i","й"=> "i","к"=> "k","л"=> "l","м"=> "m","н"=> "n", "о"=> "o","п"=> "p","р"=> "r","с"=> "s","т"=> "t","у"=> "u","ф"=> "f","х"=> "h","ц"=> "ts","ч"=> "tch","ш"=> "sh","щ"=> "sh","ъ"=> "","ы"=> "i","ь"=> "", "э"=> "ie","ю"=> "yu","я"=> "ya"," "=>" "
+    'а' => 'a',   'б' => 'b',   'в' => 'v',
+    'г' => 'g',   'д' => 'd',   'е' => 'e',
+    'ё' => 'e',   'ж' => 'zh',  'з' => 'z',
+    'и' => 'i',   'й' => 'y',   'к' => 'k',
+    'л' => 'l',   'м' => 'm',   'н' => 'n',
+    'о' => 'o',   'п' => 'p',   'р' => 'r',
+    'с' => 's',   'т' => 't',   'у' => 'u',
+    'ф' => 'f',   'х' => 'h',   'ц' => 'c',
+    'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
+    'ь' => '\'',  'ы' => 'y',   'ъ' => '\'',
+    'э' => 'e',   'ю' => 'yu',  'я' => 'ya'
 ];
 
-$str = "как дела";
-function transliteration (string $str) {
-    global $alphabet;
+$str = "Как дела!";
+function transliteration ($alphabet, string $str) {
+    $str_to_array = mb_str_split($str);
     $result = "";
-    for ($i=0; $i < strlen($str) ; $i++) { 
-        $result .= $alphabet[$str[$i]];
+    for ($i=0; $i < count($str_to_array) ; $i++) { 
+        if($alphabet[strtolower($str_to_array[$i])]) {
+            $result .= $alphabet[strtolower($str_to_array[$i])];
+        } else {
+            $result .= $str_to_array[$i];
+        }
     }
     return $result;
 }
 
-echo transliteration($str);
+echo transliteration($alphabet, $str);

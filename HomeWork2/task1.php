@@ -16,14 +16,8 @@ function miltiply(int $num_1, int $num_2):int {
     $result = $num_1 * $num_2;
     return $result;
 }
-function division(int $num_1, int $num_2):int {
-    if($num_2 == 0) {
-        echo "Ошибка деления на ноль" . "\n";
-        return 0;
-    } else {
-        $result = $num_1 / $num_2;
-        return $result;
-    }
+function division(int $num_1, int $num_2):int|float {
+        return $num_2 == 0 ? "Ошибка деления на ноль" . "\n" : $num_1 / $num_2;
 }
 
 echo division(5,0);
